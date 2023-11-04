@@ -62,9 +62,9 @@ namespace AuctionService.Controllers
             //TODO: Add current user as seller
             auction.Seller = "test";
             _context.Auctions.Add(auction);
-            var result = await _context.SaveChangesAsync() > 0;
             var newAuction = _mapper.Map<AuctionDto>(auction);
             await _publishEndpoint.Publish(_mapper.Map<AuctionsCreated>(newAuction));
+            var result = await _context.SaveChangesAsync() > 0;
             if (!result) return BadRequest("Could not save changes to the DB");
 
             return CreatedAtAction(nameof(GetAuctionById), 
