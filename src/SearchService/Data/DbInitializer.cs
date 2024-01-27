@@ -1,4 +1,3 @@
-using System.Text.Json;
 using MongoDB.Driver;
 using MongoDB.Entities;
 using SearchService.Models;
@@ -10,9 +9,9 @@ public class DbInitializer
 {
     public static async Task InitDb(WebApplication app)
     {
-        await DB.InitAsync("SearchDB",
-            MongoClientSettings
+        await DB.InitAsync("SearchDB", MongoClientSettings
                 .FromConnectionString(app.Configuration.GetConnectionString("MongoDbConnection")));
+        
         await DB.Index<Item>()
             .Key(x => x.Make, KeyType.Text)
             .Key(x => x.Model, KeyType.Text)
@@ -23,9 +22,11 @@ public class DbInitializer
 
         using var scope = app.Services.CreateScope();
         var httpClient = scope.ServiceProvider.GetRequiredService<AuctionSvcHttpClient>();
-        var items = await httpClient.GetItemsForSearchDb();
-        Console.WriteLine(items.Count + " returned from the auction service");
-
-        if (items.Count > 0) await DB.SaveAsync(items);
+        if (count == 0)
+        {
+            var items = await httpClient.GetItemsForSearchDb();
+            await DB.SaveAsync(items);
+            Console.WriteLine(items.Count + " seeded from the auction service");
+        }
     }
 }
