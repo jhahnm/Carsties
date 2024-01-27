@@ -17,6 +17,7 @@ public class DbInitializer
         if (context.Auctions.Any())
         {
             Console.WriteLine("Database already contain data. No need to seed");
+            return;
         }
 
         var auctions = new List<Auction>()
