@@ -114,7 +114,7 @@ public class Callback : PageModel
         var user = new ApplicationUser
         {
             Id = sub,
-            UserName = sub, // don't need a username, since the user will be using an external provider to login
+            UserName = sub, // don't need a Username, since the user will be using an external provider to login
         };
 
         // email
