@@ -4,8 +4,9 @@ type State = {
     pageNumber: number
     pageSize: number
     pageCount: number
-    searchTerm: string,
+    searchTerm: string
     searchValue: string
+    orderBy: string
 }
 
 type Actions = {
@@ -19,7 +20,8 @@ const initialState: State = {
     pageCount: 1,
     pageSize: 12,
     searchTerm: '',
-    searchValue: ''
+    searchValue: '',
+    orderBy: 'make'
 }
 
 export const useParamsStore = 
