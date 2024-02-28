@@ -14,8 +14,8 @@ type Actions = {
 
 const initialState: State = {
     pageNumber: 1,
-    pageCount: 12,
-    pageSize: 1,
+    pageCount: 1,
+    pageSize: 12,
     searchTerm: ''
 }
 
