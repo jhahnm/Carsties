@@ -5,14 +5,17 @@ import {Button, TextInput} from "flowbite-react";
 import Input from "@/app/components/Input";
 import {useEffect} from "react";
 import DateInput from "@/app/components/DateInput";
+import {createAuction} from "@/app/actions/auctionAction";
+import {useRouter} from "next/navigation";
 
 export default function AuctionForm() {
+    const router = useRouter();
     const {
         control,
         register, 
         handleSubmit, 
         setFocus,
-        formState: {isSubmitting, isValid, isDirty, errors}
+        formState: {isSubmitting, isValid}
     } = useForm({
         mode: "onTouched"
     });
@@ -20,8 +23,16 @@ export default function AuctionForm() {
     useEffect(() => {
         setFocus("make")
     }, [setFocus])
-    function onSubmit(data: FieldValues) {
-        console.log(data);
+    async function onSubmit(data: FieldValues) {
+        try {
+            const res = await createAuction(data);
+            if(res.error) {
+                throw new Error(res.error);
+            }
+            router.push(`/auctions/details/${res.id}`);
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <form className='flex flex-col mt-3' onSubmit={handleSubmit(onSubmit)}>
@@ -53,7 +64,7 @@ export default function AuctionForm() {
                 <Button
                     outline
                     isProcessing={isSubmitting}
-                    //disabled={!isValid}
+                    disabled={!isValid}
                     type='submit'
                     color='success'>Submit</Button>
             </div>

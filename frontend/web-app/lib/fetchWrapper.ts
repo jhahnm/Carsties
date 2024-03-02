@@ -6,12 +6,14 @@ async function handleResponse(response: Response) {
     const text = await response.text();
     const data = text && JSON.parse(text);
 
-    if(response.ok) {
+    if (response.ok) {
         return data || response.statusText
     } else {
         return {
-            status: response.status,
-            message: response.statusText
+            error: {
+                status: response.status,
+                message: response.statusText
+            }
         };
     }
 }
@@ -57,7 +59,7 @@ async function del(url: string, body: {}) {
 async function getHeaders() {
     const token = await getTokenWorkaround();
     const headers = {'Content-type': 'application/json'} as any
-    if(token) {
+    if (token) {
         headers.Authorization = 'Bearer ' + token.access_token;
     }
     return headers;
