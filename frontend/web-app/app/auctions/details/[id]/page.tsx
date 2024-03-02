@@ -5,6 +5,8 @@ import CarImage from "@/app/auctions/CarImage";
 import DetailedSpecs from "@/app/auctions/details/[id]/DetailedSpecs";
 import {getCurrentUser} from "@/app/actions/authActions";
 import EditButton from "@/app/auctions/details/[id]/EditButton";
+import {Fragment} from "react";
+import DeleteButton from "@/app/auctions/details/[id]/DeleteButton";
 
 export default async function Details({params}: {params: {id: string}}) {
     const data = await getDetailedViewData(params.id);
@@ -15,7 +17,10 @@ export default async function Details({params}: {params: {id: string}}) {
                 <div className='flex items-center gap-3'>
                     <Heading title={`${data.make} ${data.model}`} />
                     {user?.username === data.seller && (
-                        <EditButton id={data.id} />
+                        <Fragment>
+                            <EditButton id={data.id} />
+                            <DeleteButton id={data.id} />
+                        </Fragment>
                     )}
                 </div>
                 <div className='flex gap-3'>
