@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 EXPOSE 80
 
@@ -10,6 +10,7 @@ COPY src/SearchService/SearchService.csproj src/SearchService/SearchService.cspr
 COPY src/GatewayService/GatewayService.csproj src/GatewayService/GatewaynService.csproj
 COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj
 COPY src/IdentityServer/IdentityServer.csproj src/IdentityServer/IdentityServer.csproj
+COPY src/BiddingService/BiddingService.csproj src/BiddingService/BiddingService.csproj
 
 # Restore package deps
 RUN dotnet restore Carsties.sln
@@ -21,7 +22,7 @@ WORKDIR /app/src/AuctionService
 RUN dotnet publish -c Release -o /app/src/out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/src/out .
 ENTRYPOINT [ "dotnet", "AuctionService.dll" ]
