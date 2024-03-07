@@ -5,7 +5,7 @@ using NotificationService.Hubs;
 
 namespace NotificationService.Consumers;
 
-public class AuctionCreatedConsumer: IConsumer<AuctionsCreated>
+public class AuctionCreatedConsumer: IConsumer<AuctionCreated>
 {
     private readonly IHubContext<NotificationHub> _hubContext;
 
@@ -13,7 +13,7 @@ public class AuctionCreatedConsumer: IConsumer<AuctionsCreated>
     {
         _hubContext = hubContext;
     }
-    public async Task Consume(ConsumeContext<AuctionsCreated> context)
+    public async Task Consume(ConsumeContext<AuctionCreated> context)
     {
         Console.WriteLine("--> auction created message received");
 
