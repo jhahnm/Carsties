@@ -8,7 +8,7 @@ type State = {
 
 type Actions = {
     setBids: (bids: Bid[]) => void
-    addBids: (bid: Bid) => void
+    addBid: (bid: Bid) => void
 }
 
 export const useBidStore = createWithEqualityFn<State & Actions>((set) => ({
@@ -18,7 +18,7 @@ export const useBidStore = createWithEqualityFn<State & Actions>((set) => ({
             bids
         }))
     },
-    addBids: (bid) => {
+    addBid: (bid) => {
         set((state) => ({
             bids: !state.bids.find(x => x.id === bid.id) ? [bid, ...state.bids] : [...state.bids]
         }))
