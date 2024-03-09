@@ -24,7 +24,6 @@ function BidForm({auctionId, highBid}: Props) {
     function onSubmit(data: FieldValues) {
          placeBidForAuction(auctionId, +data.amount).then(bid => {
              if(bid.error) throw bid.error;
-             
              addBid(bid);
              reset();
          }).catch(err => toast.error(err.message));
