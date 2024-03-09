@@ -31,13 +31,7 @@ export default function Search() {
                 type="text"
                 placeholder='Search for cars by make, model or color'
                 className='
-                    flex-grow
-                    pl-5
-                    bg-transparent
-                    border-transparent
-                    focus:outline-none
-                    focus:ring-0
-                    focus:border-transparent
+                    input-custom
                     text-sm
                     text-gray-600
                 '
