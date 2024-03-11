@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: src/IdentityService/Dockerfile
+          file: src/IdentityServer/Dockerfile
           push: true
           tags: julioh/identity-svc:latest
