@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-svc
+  labels:
+    app: gateway-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-svc
+  template:
+    metadata:
+      name: gateway-svc
+      labels:
+        app: gateway-svc
+    spec:
+      containers:
+        - name: gateway-svc
+          image: julioh/gateway-svc
+          imagePullPolicy: Never
+          env:
+            - name: ClientApp
+              value: https://app.carsties.com
+            - name: VIRTUAL_HOST
+              value: api.carsties.com
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-clusterip
+spec:
+  selector:
+    app: gateway-svc
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
