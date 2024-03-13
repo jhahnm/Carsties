@@ -33,6 +33,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: postgres-clusterip
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: postgres-lb
 spec:
   type: LoadBalancer
