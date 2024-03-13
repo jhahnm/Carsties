@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-svc
+  labels:
+    app: search-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search-svc
+  template:
+    metadata:
+      name: search-svc
+      labels:
+        app: search-svc
+    spec:
+      containers:
+        - name: search-svc
+          image: julioh/search-svc
+          imagePullPolicy: Never
+          env:
+            - name: RabbitMq__Host
+              value: rabbit-clusterip
+            - name: RabbitMq__Username
+              value: rabbit
+            - name: RabbitMq__Password
+              value: rabbit
+            - name: ConnectionStrings__MongoDbConnection
+              value: mongodb://root:mongopw@mongo-clusterip
+            - name: AuctionServiceUrl
+              value: http://auction-clusterip
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-clusterip
+spec:
+  selector:
+    app: search-svc
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
