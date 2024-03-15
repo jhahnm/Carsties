@@ -64,7 +64,7 @@ internal static class HostingExtensions
 
         app.UseStaticFiles();
         app.UseRouting();
-        
+        //This is a workaround for the identity service to place the https protocol
         if (app.Environment.IsProduction())
         {
             app.Use(async (ctx, next) =>

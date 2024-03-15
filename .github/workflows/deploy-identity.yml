@@ -5,7 +5,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'src/identityServer/**'
+      - 'src/IdentityServer/**'
 
 jobs:
   build:
