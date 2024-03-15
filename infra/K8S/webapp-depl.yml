@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: webapp
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: julioh/web-app
+          imagePullPolicy: Never
+          env:
+            - name: NEXTAUTH_SECRET
+              value: somethingreallyreallysecret
+            - name: NEXTAUTH_URL
+              value: https://app.carsties.com
+            - name: API_URL
+              value: http://gateway-clusterip/
+            - name: ID_URL
+              value: https://id.juliohahn.com
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-clusterip
+spec:
+  selector:
+    app: webapp
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-lb
+spec:
+  selector:
+    app: webapp
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: LoadBalancer

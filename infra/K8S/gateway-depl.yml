@@ -22,8 +22,6 @@ spec:
           env:
             - name: ClientApp
               value: https://app.carsties.com
-            - name: VIRTUAL_HOST
-              value: api.carsties.com
       restartPolicy: Always
 ---
 apiVersion: v1
