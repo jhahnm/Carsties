@@ -6,10 +6,6 @@ on:
     branches: [ "main" ]
     paths:
       - 'src/identityServer/**'
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - 'src/identityServer/**'
 
 jobs:
   build:
