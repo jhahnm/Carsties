@@ -22,6 +22,8 @@ spec:
           env:
             - name: ClientApp
               value: https://app.carsties.com
+            - name: IdentityServiceUrl
+              value: https://id.juliohahn.com
       restartPolicy: Always
 ---
 apiVersion: v1

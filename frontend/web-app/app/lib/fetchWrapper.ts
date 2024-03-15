@@ -17,7 +17,7 @@ async function handleResponse(response: Response) {
         return {
             error: {
                 status: response.status,
-                message: typeof data === 'string' ? data : response.statusText
+                message: typeof data === 'string' && data.length ? data : response.statusText
             }
         };
     }
