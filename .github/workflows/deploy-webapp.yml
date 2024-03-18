@@ -6,6 +6,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'frontend/web-app/**'
+
 env: 
   REGISTRY_IMAGE: julioh/web-app
   DOCKERFILE: frontend/web-app/Dockerfile
@@ -35,4 +36,4 @@ jobs:
       - name: Save DigitalOcean kubeconfig
         run: doctl kubernetes cluster kubeconfig save carsties
       - name: Restart kubernetes deployment
-      - run: kubectl rollout restart deployment ${{ env.DEPLOYMENT_NAME }}
+        run: kubectl rollout restart deployment ${{ env.DEPLOYMENT_NAME }}
