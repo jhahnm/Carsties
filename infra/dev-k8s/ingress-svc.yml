@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-svc
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    name: ingress-svc
 spec:
   ingressClassName: nginx
   tls:
@@ -15,7 +15,7 @@ spec:
     - host: app.carsties.com
       http:
         paths:
-          - path: /
+          - path: "/"
             pathType: Prefix
             backend:
               service:
@@ -25,7 +25,7 @@ spec:
     - host: api.carsties.com
       http:
         paths:
-          - path: /
+          - path: "/"
             pathType: Prefix
             backend:
               service:

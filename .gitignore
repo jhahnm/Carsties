@@ -5,6 +5,7 @@
 
 # User-specific files
 appsettings.json
+prod-secrets.yml
 *.rsuser
 *.suo
 *.user
