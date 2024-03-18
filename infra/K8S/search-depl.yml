@@ -18,7 +18,7 @@ spec:
       containers:
         - name: search-svc
           image: julioh/search-svc
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env:
             - name: RabbitMq__Host
               value: rabbit-clusterip

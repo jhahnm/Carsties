@@ -18,7 +18,7 @@ spec:
       containers:
         - name: webapp
           image: julioh/web-app
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env:
             - name: NEXTAUTH_SECRET
               valueFrom:
