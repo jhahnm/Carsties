@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: ClientApp
-              value: https://app.carsties.com
+              value: https://app.jhahn.store
             - name: IdentityServiceUrl
               value: https://id.juliohahn.com
       restartPolicy: Always

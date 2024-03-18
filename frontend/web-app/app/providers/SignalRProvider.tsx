@@ -20,7 +20,7 @@ function SignalRProvider({children, user}: Props) {
     const setCurrentPrice = useAuctionStore(state => state.setCurrentPrice)
     const addBid = useBidStore(state => state.addBid);
     const apiUrl = process.env.NODE_ENV === 'production'
-        ? 'https://api.carsties.com/notifications'
+        ? 'https://api.jhahn.store/notifications'
         : process.env.NEXT_PUBLIC_NOTIFY_URL;
     
     
