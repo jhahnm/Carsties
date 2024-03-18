@@ -46,15 +46,3 @@ spec:
     - port: 3000
       targetPort: 3000
   type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: webapp-lb
-spec:
-  selector:
-    app: webapp
-  ports:
-    - port: 3000
-      targetPort: 3000
-  type: LoadBalancer
